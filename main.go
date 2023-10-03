@@ -14,8 +14,8 @@ func main() {
     http.HandleFunc("/", RootHandler(db))
 
     // Specify the paths to your SSL certificate and private key files.
-    certFile := "/path/to/your/ssl-certificate.pem"
-    keyFile := "/path/to/your/private-key.pem"
+    certFile := "./ssl-certificate.pem"
+    keyFile := "./private-key.pem"
 
     // Start an HTTPS server using your SSL certificate and private key.
     err = http.ListenAndServeTLS(":443", certFile, keyFile, nil)
