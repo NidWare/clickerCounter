@@ -12,5 +12,5 @@ func main() {
 	defer db.Close()
 
 	http.HandleFunc("/", RootHandler(db))
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":80", nil)
 }
