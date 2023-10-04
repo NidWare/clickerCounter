@@ -33,6 +33,6 @@ func RootHandler(db *sql.DB) http.HandlerFunc {
 		}
 
 		// Redirect to Google.com
-		http.Redirect(w, r, "google.com", http.StatusSeeOther)
+		http.Redirect(w, r, "https://google.com", http.StatusSeeOther)
 	}
 }
