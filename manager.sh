@@ -7,7 +7,7 @@ case $1 in
   start)
     # Build and start the container detached with restart policy
     docker build -t golang_server .
-    docker run -d --restart=unless-stopped --name $CONTAINER_NAME -p 443:443 -v $VOLUME_PATH/clicks.db:/app/clicks.db golang_server
+    docker run -d --restart=unless-stopped --name $CONTAINER_NAME -p 80:80 -p 443:443 -v $VOLUME_PATH/clicks.db:/app/clicks.db golang_server
     ;;
   stop)
     # Stop and remove the container
