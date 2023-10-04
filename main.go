@@ -25,8 +25,8 @@ func main() {
 	}()
 
 	// Specify the paths to your SSL certificate and private key files.
-	certFile := "./ssl-certificate.pem"
-	keyFile := "./private-key.pem"
+	certFile := "./fullchain.pem"
+	keyFile := "./privkey.pem"
 
 	// Start an HTTPS server using your SSL certificate and private key.
 	if err := http.ListenAndServeTLS(":443", certFile, keyFile, nil); err != nil {
