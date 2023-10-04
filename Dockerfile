@@ -16,13 +16,16 @@ RUN go mod download
 # Copy the source from the current directory to the Working Directory inside the container
 COPY . .
 
+COPY /etc/letsencrypt/live/yourlady.site/fullchain.pem .
+COPY /etc/letsencrypt/live/yourlady.site/privkey.pem .
+
 # Build the application
 RUN go build -o main .
 
 RUN ls -al /app
 
 # Expose port 8080 to the outside world
-EXPOSE 443
+EXPOSE 80 443
 
 # Run the application
 CMD ["./main"]
