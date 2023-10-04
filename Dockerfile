@@ -22,7 +22,7 @@ RUN go build -o main .
 RUN ls -al /app
 
 # Expose port 8080 to the outside world
-EXPOSE 80
+EXPOSE 443
 
 # Run the application
 CMD ["./main"]
