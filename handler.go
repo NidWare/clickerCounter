@@ -18,13 +18,11 @@ func RootHandler(db *sql.DB) http.HandlerFunc {
 		cookie, err := r.Cookie("visited")
 
 		// Always redirect to the specified URL
-		redirectURL := "https://google.com" // Change this to your default redirect URL
+		redirectURL := "https://fansly.com/VikiMinelli/posts" // Change this to your default redirect URL
 		if referral != "" {
 			// Define a map of redirects based on the "r" parameter
 			redirects := map[string]string{
-				"king":    "https://king.com",
-				"example": "https://example.com",
-				// Add more mappings as needed
+				"kj_bennet": "https://fans.ly/subscriptions/giftcode/NTY3MDk5Nzg3NDM4OTkzNDEwOjE6MTowYjMwNmY1NzA3",
 			}
 
 			// Check if the "r" parameter is in the redirects map
