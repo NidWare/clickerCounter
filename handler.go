@@ -17,13 +17,34 @@ func RootHandler(db *sql.DB) http.HandlerFunc {
 		referral := r.URL.Query().Get("r")
 		cookie, err := r.Cookie("visited")
 
-		if err != nil {
+		// Always redirect to the specified URL
+		redirectURL := "https://google.com" // Change this to your default redirect URL
+		if referral != "" {
+			// Define a map of redirects based on the "r" parameter
+			redirects := map[string]string{
+				"king":    "https://king.com",
+				"example": "https://example.com",
+				// Add more mappings as needed
+			}
+
+			// Check if the "r" parameter is in the redirects map
+			if mappedURL, ok := redirects[referral]; ok {
+				redirectURL = mappedURL
+			}
+		}
+
+		// Redirect to the determined URL
+		http.Redirect(w, r, redirectURL, http.StatusSeeOther)
+
+		if err != nil || cookie.Value != "true" {
+			// Update clicks only if the user hasn't visited before
 			err = UpdateClicks(db, referral)
 			if err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return
 			}
 
+			// Set the visited cookie to indicate that the user has visited
 			expire := time.Now().AddDate(1, 0, 0)
 			http.SetCookie(w, &http.Cookie{
 				Name:    "visited",
@@ -31,19 +52,5 @@ func RootHandler(db *sql.DB) http.HandlerFunc {
 				Expires: expire,
 			})
 		}
-
-		// Define a map of redirects based on the "r" parameter
-		redirects := map[string]string{
-			"kj_bennet": "https://fans.ly/subscriptions/giftcode/NTY3MDk5Nzg3NDM4OTkzNDEwOjE6MTowYjMwNmY1NzA3",
-		}
-
-		// Check if the "r" parameter is in the redirects map
-		if redirectURL, ok := redirects[referral]; ok {
-			http.Redirect(w, r, redirectURL, http.StatusSeeOther)
-			return
-		}
-
-		// Default redirect to Google.com
-		http.Redirect(w, r, "https://google.com", http.StatusSeeOther)
 	}
 }
