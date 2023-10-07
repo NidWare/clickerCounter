@@ -23,7 +23,7 @@ func RootHandler(db *sql.DB) http.HandlerFunc {
 		referral := r.URL.Query().Get("r")
 		cookie, err := r.Cookie("visited")
 
-		if err != nil || cookie.Value != "true" {
+		if err != nil {
 			// Check if the "r" parameter is in the redirects map
 			if redirectURL, ok := redirects[referral]; ok {
 				http.Redirect(w, r, redirectURL, http.StatusSeeOther)
