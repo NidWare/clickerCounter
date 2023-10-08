@@ -9,6 +9,7 @@ func redirectTLS(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	//todo: make naming correct
 	db, err := InitDB("./clicks.db")
 	if err != nil {
 		panic(err)

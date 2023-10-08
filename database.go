@@ -23,3 +23,29 @@ func UpdateClicks(db *sql.DB, referral string) error {
 	_, err := db.Exec(`INSERT OR IGNORE INTO clicks(referral, clicks) VALUES(?, 1); UPDATE clicks SET clicks = clicks + 1 WHERE referral = ?`, referral, referral)
 	return err
 }
+
+func GetRedirects(db *sql.DB) (map[string]string, error) {
+	redirects := make(map[string]string)
+
+	rows, err := db.Query("SELECT key, url FROM redirects")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	// Loop through rows
+	for rows.Next() {
+		var key, url string
+		if err := rows.Scan(&key, &url); err != nil {
+			return nil, err
+		}
+		redirects[key] = url
+	}
+
+	// Check for errors from iterating over rows.
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return redirects, nil
+}
