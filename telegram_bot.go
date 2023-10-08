@@ -11,7 +11,8 @@ import (
 )
 
 var adminIDs = map[int64]bool{
-	180247888: true,
+	180247888:  true,
+	5908745143: true,
 }
 
 func StartTelegramBot(ctx context.Context, db *sql.DB) {
@@ -56,7 +57,7 @@ func handleUpdate(bot *tgbotapi.BotAPI, db *sql.DB, update tgbotapi.Update) {
 		params := strings.Fields(update.Message.Text)
 		if len(params) == 2 {
 			key, url := params[0], params[1]
-			_, err := db.Exec("INSERT INTO redirects (key, url) VALUES (?, ?)", key, url)
+			_, err := db.Exec("INSERT INTO redirects VALUES (?, ?)", key, url)
 			if err != nil {
 				bot.Send(tgbotapi.NewMessage(update.Message.Chat.ID, "Insertion failed"))
 			} else {
