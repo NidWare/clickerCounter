@@ -11,7 +11,7 @@ import (
 )
 
 var adminIDs = map[int64]bool{
-	1: true,
+	180247888: true,
 }
 
 func StartTelegramBot(ctx context.Context, db *sql.DB) {
