@@ -4,19 +4,23 @@ import (
 	"context"
 	"database/sql"
 	"log"
+	"os"
 	"strings"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
 var adminIDs = map[int64]bool{
-	1:    true,
-	3434: true,
-	56:   true,
+	1: true,
 }
 
 func StartTelegramBot(ctx context.Context, db *sql.DB) {
-	bot, err := tgbotapi.NewBotAPI("YOUR_TELEGRAM_BOT_TOKEN")
+	botToken := os.Getenv("TELEGRAM_BOT_TOKEN")
+	if botToken == "" {
+		log.Fatal("TELEGRAM_BOT_TOKEN is not set")
+	}
+
+	bot, err := tgbotapi.NewBotAPI(botToken)
 	if err != nil {
 		log.Fatal(err)
 	}
