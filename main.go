@@ -1,6 +1,8 @@
 package main
 
 import (
+	"context"
+	"log"
 	"net/http"
 )
 
@@ -9,28 +11,29 @@ func redirectTLS(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	//todo: make naming correct
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
 	db, err := InitDB("./clicks.db")
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	defer db.Close()
 
 	http.HandleFunc("/", RootHandler(db))
 
-	// Redirect HTTP to HTTPS.
 	go func() {
 		if err := http.ListenAndServe(":80", http.HandlerFunc(redirectTLS)); err != nil {
-			panic(err)
+			log.Fatal(err)
 		}
 	}()
 
-	// Specify the paths to your SSL certificate and private key files.
+	go StartTelegramBot(ctx, db)
+
 	certFile := "./fullchain.pem"
 	keyFile := "./privkey.pem"
 
-	// Start an HTTPS server using your SSL certificate and private key.
 	if err := http.ListenAndServeTLS(":443", certFile, keyFile, nil); err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 }
