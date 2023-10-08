@@ -27,7 +27,7 @@ func UpdateClicks(db *sql.DB, referral string) error {
 func GetRedirects(db *sql.DB) (map[string]string, error) {
 	redirects := make(map[string]string)
 
-	rows, err := db.Query("SELECT param, url FROM redirects")
+	rows, err := db.Query("SELECT key, url FROM redirects")
 	if err != nil {
 		return nil, err
 	}
