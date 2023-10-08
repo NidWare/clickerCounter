@@ -15,6 +15,16 @@ func RootHandler(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
+		if r.URL.Path == "/favicon.ico" {
+			http.NotFound(w, r)
+			return
+		}
+
+		if r.Header.Get("Purpose") == "prefetch" {
+			http.NotFound(w, r)
+			return
+		}
+
 		referral := r.URL.Query().Get("r")
 
 		redirectURL := "https://fansly.com/VikiMinelli/posts"
