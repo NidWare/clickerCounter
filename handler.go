@@ -25,7 +25,6 @@ func RootHandler(db *sql.DB) http.HandlerFunc {
 			if err != nil {
 				fmt.Println("Error caught while getting redirects")
 			}
-			fmt.Println(redirects)
 			// Check if the "r" parameter is in the redirects map
 			if mappedURL, ok := redirects[referral]; ok {
 				redirectURL = mappedURL
