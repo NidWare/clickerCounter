@@ -27,7 +27,7 @@ func RootHandler(db *sql.DB) http.HandlerFunc {
 
 		referral := r.URL.Query().Get("r")
 
-		redirectURL := "https://fansly.com/VikiMinelli/posts"
+		redirectURL := "https://fansly.com/FoxyFlair/posts"
 
 		if referral != "" {
 			redirects, err := GetRedirects(db)
