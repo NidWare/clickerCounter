@@ -25,7 +25,7 @@ func RootHandler(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
-		referral := r.URL.Query().Get("r")
+		referral := r.URL.Query().Get("utm_source")
 
 		redirectURL := "https://fansly.com/FoxyFlair/posts"
 
