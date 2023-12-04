@@ -39,8 +39,6 @@ func RootHandler(db *sql.DB) http.HandlerFunc {
 			}
 		}
 
-		http.Redirect(w, r, redirectURL, http.StatusSeeOther)
-
 		cookie, err := r.Cookie("visited")
 
 		if err != nil {
@@ -66,5 +64,8 @@ func RootHandler(db *sql.DB) http.HandlerFunc {
 				fmt.Println("Strange cookies")
 			}
 		}
+
+		http.Redirect(w, r, redirectURL, http.StatusSeeOther)
+
 	}
 }
