@@ -12,7 +12,7 @@ func main() {
 	}
 	defer db.Close()
 
-	http.HandleFunc("/", RootHandler)
+	http.HandleFunc("/link", RootHandler)
 
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal(err)
