@@ -70,6 +70,6 @@ func RootHandler(w http.ResponseWriter, r *http.Request) {
 	//	}
 	//}
 
-	http.Redirect(w, r, redirectURL, http.StatusAccepted)
+	http.Redirect(w, r, redirectURL, http.StatusOK)
 
 }
