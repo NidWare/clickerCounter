@@ -1,7 +1,6 @@
 package main
 
 import (
-	"database/sql"
 	"fmt"
 	"log"
 	"net/http"
@@ -45,33 +44,32 @@ func RootHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-		//cookie, err := r.Cookie("visited")
-		//
-		//if err != nil {
-		//	if err == http.ErrNoCookie {
-		//		err = UpdateClicks(db, referral)
-		//		if err != nil {
-		//			http.Error(w, err.Error(), http.StatusInternalServerError)
-		//			return
-		//		}
-		//
-		//		expire := time.Now().AddDate(1, 0, 0)
-		//		http.SetCookie(w, &http.Cookie{
-		//			Name:    "visited",
-		//			Value:   "true",
-		//			Expires: expire,
-		//		})
-		//	} else {
-		//		http.Error(w, err.Error(), http.StatusInternalServerError)
-		//		return
-		//	}
-		//} else {
-		//	if cookie.Value != "true" {
-		//		fmt.Println("Strange cookies")
-		//	}
-		//}
+	//cookie, err := r.Cookie("visited")
+	//
+	//if err != nil {
+	//	if err == http.ErrNoCookie {
+	//		err = UpdateClicks(db, referral)
+	//		if err != nil {
+	//			http.Error(w, err.Error(), http.StatusInternalServerError)
+	//			return
+	//		}
+	//
+	//		expire := time.Now().AddDate(1, 0, 0)
+	//		http.SetCookie(w, &http.Cookie{
+	//			Name:    "visited",
+	//			Value:   "true",
+	//			Expires: expire,
+	//		})
+	//	} else {
+	//		http.Error(w, err.Error(), http.StatusInternalServerError)
+	//		return
+	//	}
+	//} else {
+	//	if cookie.Value != "true" {
+	//		fmt.Println("Strange cookies")
+	//	}
+	//}
 
-		http.Redirect(w, r, redirectURL, http.StatusSeeOther)
+	http.Redirect(w, r, redirectURL, http.StatusSeeOther)
 
-	}
 }
