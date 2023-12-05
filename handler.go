@@ -38,6 +38,8 @@ func RootHandler(w http.ResponseWriter, r *http.Request) {
 		redirects, err := GetRedirects(db)
 		if err != nil {
 			fmt.Println("Error caught while getting redirects")
+			http.Redirect(w, r, redirectURL, http.StatusOK)
+			return
 		}
 		if mappedURL, ok := redirects[referral]; ok {
 			redirectURL = mappedURL
